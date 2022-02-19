@@ -9,27 +9,25 @@ registrycredential = 'DockerID'
 }
 stages {
  stage('build') { 
-steps {
-echo "build step"
-sh 'mvn clean'
-sh 'mvn install'
-sh 'mvn package'
-}
-}
-stages {
+   steps {
+    echo "build step"
+    sh 'mvn clean'
+    sh 'mvn install'
+    sh 'mvn package'
+   }
+ }
  stage('test') {
-steps {
-echo "test step"
-sh 'mvn test'
-}
-}
-stages{ 
- stage('deploy') {
-steps {
-script {
-docker.build registry + ":$BUILD_NUMBER" 
-}
-}
+   steps {
+    echo "test step"
+    sh 'mvn test'
+   }
+ }
+ stages('deploy') {
+   steps {
+    script {
+     docker.build registry + ":$BUILD_NUMBER" 
+   }
+ }
 }
 }
 }
