@@ -1,0 +1,33 @@
+pipeline {
+agent any
+tools {
+maven 'M2_HOME'
+}
+environment {
+registry = "kserge2001/devops-pipeline"
+registrycredential = 'dockerhub'
+}
+stages {
+ stage('build'){ 
+steps {
+echo "build step"
+sh 'mvn clean'
+sh 'mvn install'
+sh 'mvn package'
+}
+}
+stages('test'){ 
+steps {
+echo "test step"
+sh 'mvn test'
+}
+}
+stages('deploy'){ 
+steps {
+script {
+docker.build registry + ":$BUILD_NUMBER" 
+}
+}
+}
+}
+}
