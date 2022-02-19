@@ -22,7 +22,8 @@ stages {
     sh 'mvn test'
    }
  }
- stages('deploy') {
+ stages {
+   stage('deploy') {
    steps {
     script {
      docker.build registry + ":$BUILD_NUMBER" 
@@ -31,3 +32,4 @@ stages {
 }
 }
 }
+} 
