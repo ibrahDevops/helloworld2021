@@ -5,7 +5,7 @@ maven 'M2_HOME'
 }
 environment {
 registry = "ibrahimah/jenkins_file-pipeline"
-registrycredential = 'dockerhub'
+registrycredential = 'DockerID'
 }
 stages {
  stage('build'){ 
