@@ -17,7 +17,7 @@ sh 'mvn package'
 }
 }
 stages {
- stage('test'){
+ stage('test') {
 steps {
 echo "test step"
 sh 'mvn test'
